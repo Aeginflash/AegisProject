@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +16,20 @@ public class PlayerHurtDamage : MonoBehaviour
     public Enemy enemy;
 
     public Slider healthBar;
+    public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI restartText;
+
+    public GameManager gameManager;
+    public bool isGameOver=false;
+
 
     void Start()
     {
         enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
         healthBar.value = healthBar.maxValue = playerHealth;
+        gameOverText.gameObject.SetActive(false);
+        restartText.gameObject.SetActive(false);
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
     }
 
@@ -27,14 +37,13 @@ public class PlayerHurtDamage : MonoBehaviour
     void Update()
     {
         //自机血量归0时，游戏结束
-        if (playerHealth <= 0)
+        GameOver(playerHealth);
+        if (isGameOver&&Input.GetKeyDown(KeyCode.Z))
         {
-            Debug.Log("GameOver!");
-            Destroy(gameObject);
+                gameManager.Restart();
+                isGameOver = false;
         }
     }
-
-
     void OnTriggerEnter2D(Collider2D other)
     {
 
@@ -51,5 +60,22 @@ public class PlayerHurtDamage : MonoBehaviour
         playerHealth -= lastPlayerHurt;
         healthBar.value = playerHealth;
     }
+    public void GameOver(float playerHealth)
+    {
+        if (playerHealth <= 0)
+        {
+            isGameOver = true;
+            if (isGameOver == true)
+            {
+                Debug.Log("gameover");
+            }
+            Destroy(gameObject);
+            gameOverText.gameObject.SetActive(true);
+            restartText.gameObject.SetActive(true);
+
+
+        }
+    }
+
 
 }

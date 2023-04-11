@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float verticalInput;
     //移动速度
     public float speed = 8.0f;
+    public float normalSpeed = 8.0f;
     public float lowSpeed = 4.0f;
     //边界
     public float XRange = 14.7f;
@@ -23,28 +24,98 @@ public class PlayerController : MonoBehaviour
     public int bombDamage = 50;
 
     public GameObject plyBullet;
+    public GameObject decisionPoint;
+    public PlayerHurtDamage playerHurtDamage;
+    
+    public bool isGameOver;
+    public bool isSlowMode;
+    //子机
+    public GameObject[] weaponPrefabs;
+    public float[] weaponOffsetX;
+    public float[] weaponOffsetY; // 每个武器在Y轴的偏移量
+    public float weaponDistance = 1.5f;
+    public float weaponDistanceSlow = 0.8f;// 武器与玩家的距离
+    public float moveSpeed = 5f;
+    private List<GameObject> weapons = new List<GameObject>();
 
     void Start()
     {
+        isSlowMode = false;
         invokeTime = currentTime;
+        playerHurtDamage = FindObjectOfType<PlayerHurtDamage>();
+        isGameOver = playerHurtDamage.isGameOver;
+        //子机
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject weapon = Instantiate(weaponPrefabs[i], transform.position, Quaternion.identity);
+            weapons.Add(weapon);
+            
+        }
+        decisionPoint.SetActive(false);
+
     }
 
 
     void Update()
     {
+        
+        
+        if(isGameOver ==true)
+        {
+            Debug.Log("gameover");
+        }
+        if (isGameOver == false)
+        {
+            SlowMode();
+            PlayerMove();
+            PlayerShoot(plyBullet);
+            PlayerRange(XRange, YRange);
+
+            if (!isSlowMode)
+            {
+                for (int i = 0; i < weapons.Count; i++)
+                {
+                    Vector3 weaponPos = transform.position + new Vector3(weaponOffsetX[i], weaponOffsetY[i], 0).normalized * weaponDistance;
+                    weapons[i].transform.position = weaponPos;
+                }
+            }
+            if (isSlowMode)
+            {
+                for (int i = 0; i < weapons.Count; i++)
+                {
+                    Vector3 weaponPos = transform.position + new Vector3(weaponOffsetX[i], weaponOffsetY[i], 0).normalized * weaponDistanceSlow;
+                    weapons[i].transform.position = weaponPos;
+                }
+            }
+        }
+    }
+    public void SlowMode()
+    {
+        speed = normalSpeed;
         if (Input.GetKey(KeyCode.LeftShift))
         {
+            isSlowMode = true;
             speed = lowSpeed;
+            decisionPoint.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            speed = 8.0f;
+            isSlowMode = false;
+            speed = normalSpeed;
+            decisionPoint.SetActive(false);
         }
+    }
+    public void PlayerMove()
+    {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
 
         verticalInput = Input.GetAxisRaw("Vertical");
         transform.Translate(Vector3.up * verticalInput * Time.deltaTime * speed);
+    }
+
+    public void PlayerShoot(GameObject plyBullet)
+    {
         //发射子弹
         if (Input.GetKey(KeyCode.Z))
         {
@@ -64,8 +135,9 @@ public class PlayerController : MonoBehaviour
             //松开Z键重置
             invokeTime = currentTime;
         }
-        //bomb测试
-       
+    } 
+    public void PlayerRange(float XRange,float YRange)
+    {
         //判定x轴边界
         if (transform.position.x < -XRange)
         {

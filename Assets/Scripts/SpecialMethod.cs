@@ -6,13 +6,17 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class SpecialMethod : MonoBehaviour
 {
+    //每秒伤害
     public int bombDamage = 5;
     public float bombDuration = 5;
     public Enemy enemy;
     private bool bombCoolDown = false;
+    //特效
     public PostProcessVolume postProcessVolume;
     private Bloom bloom;
     private ColorGrading colorGrading;
+    //判断特效计时器运行
+    private bool isTimerRunning = false;
 
     public float timer = 0.5f;
     // Start is called before the first frame update
@@ -52,32 +56,47 @@ public class SpecialMethod : MonoBehaviour
 
         postProcessVolume.profile.TryGetSettings(out bloom);
         postProcessVolume.profile.TryGetSettings(out colorGrading);
-        StartCoroutine(Timer());
+        if (!isTimerRunning)
+        {
+            StartCoroutine(Timer());
+        }
 
         while (Time.time < startTime + bombDuration)
         {
-            enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
+            
             foreach (GameObject enemyObj in GameObject.FindGameObjectsWithTag("Enemy"))
             {
-                if (enemy != null)
+                enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
+                if (enemy != null&&enemy.health>0)
                 {
                     enemy.TakeDamage(bombDamage * Time.deltaTime);
+                   
                 }
+                if(enemy.health<=0)
+                {
+                    postProcessVolume.enabled = false;
+                    yield break;
+                }
+                
             }
             yield return null;
         }
         bombCoolDown = false;
         postProcessVolume.enabled = false;
+        isTimerRunning = false;
+        StopCoroutine(Timer());
     }
 
     IEnumerator Timer()
     {
-        while (true)
+        isTimerRunning = true;
+        enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
+        while (isTimerRunning==true&&enemy.health>0)
         {
             yield return new WaitForSeconds(timer);
             bloom.enabled.value = !bloom.enabled.value;
             colorGrading.enabled.value = !colorGrading.enabled.value;
-        }
+        }        
     }
 }
 

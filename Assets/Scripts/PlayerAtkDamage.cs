@@ -6,10 +6,11 @@ public class PlayerAtkDamage : MonoBehaviour
 {
     // Start is called before the first frame update
     public int damage;
+    public PlayerHurtDamage playerHurtDamage;
 
     void Start()
     {
-
+        playerHurtDamage= FindObjectOfType<PlayerHurtDamage>();
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class PlayerAtkDamage : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (playerHurtDamage.isGameOver==false&&other.gameObject.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().TakeDamage(damage);
             Destroy(gameObject);
