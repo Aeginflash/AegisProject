@@ -17,13 +17,14 @@ public class SpecialMethod : MonoBehaviour
     private ColorGrading colorGrading;
     //判断特效计时器运行
     private bool isTimerRunning = false;
+    public GameObject bombText;
 
     public float timer = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
         postProcessVolume.enabled = false;
-
+        bombText.SetActive(false);
         
     }
 
@@ -49,6 +50,7 @@ public class SpecialMethod : MonoBehaviour
 
     IEnumerator BombActive()
     {
+        bombText.SetActive(true);
         postProcessVolume.enabled = true;
         bombCoolDown = true;
 
@@ -75,12 +77,14 @@ public class SpecialMethod : MonoBehaviour
                 if(enemy.health<=0)
                 {
                     postProcessVolume.enabled = false;
+                    bombText.SetActive(false);
                     yield break;
                 }
                 
             }
             yield return null;
         }
+        bombText.SetActive (false);
         bombCoolDown = false;
         postProcessVolume.enabled = false;
         isTimerRunning = false;

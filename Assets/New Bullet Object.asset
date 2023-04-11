@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b889738d9cac18a4fa63553b613e0e20, type: 3}
   m_Name: New Bullet Object
   m_EditorClassIdentifier: 
-  LinearVelocity: 6
+  LinearVelocity: 3
   Acceleration: 0
   AngularVelocity: 30
   AngularAcceleration: 0
   MaxVelocity: 2.1474836e+9
-  LifeTime: 8
+  LifeTime: 10
   enmBulletCount: 0.5
   InitRotation: 0
   SenderAngularVelocity: 20
   MaxSenderAngularVelocity: 2.1474836e+9
   SenderAcceleration: -10
-  Count: 8
-  LineAngle: 30
+  Count: 5
+  LineAngle: 45
   SendInterval: 0.2
   bulletAppearances: []
   prefabs: {fileID: 599675417866864716, guid: f7540d4c840c2314c88ac7776660f0ac, type: 3}

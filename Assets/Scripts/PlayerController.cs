@@ -38,12 +38,19 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     private List<GameObject> weapons = new List<GameObject>();
 
+    //²Áµ¯
+    public float grazeRadius = 1f; // ²Áµ¯°ë¾¶
+    public int grazeCount = 0; // ²Áµ¯´ÎÊý
+    
+
+
     void Start()
     {
         isSlowMode = false;
         invokeTime = currentTime;
         playerHurtDamage = FindObjectOfType<PlayerHurtDamage>();
         isGameOver = playerHurtDamage.isGameOver;
+ 
         //×Ó»ú
         for (int i = 0; i < 4; i++)
         {
@@ -58,12 +65,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
-        
-        if(isGameOver ==true)
-        {
-            Debug.Log("gameover");
-        }
         if (isGameOver == false)
         {
             SlowMode();
@@ -87,7 +88,27 @@ public class PlayerController : MonoBehaviour
                     weapons[i].transform.position = weaponPos;
                 }
             }
+            //²Áµ¯
+            foreach (BulletBehaviour enmBullet in FindObjectsOfType<BulletBehaviour>())
+            {
+                if (enmBullet.isGrazed) return;
+                
+                Vector2 offset = enmBullet.transform.position - transform.position;
+                if (offset.magnitude <= grazeRadius) // ÅÐ¶ÏÊÇ·ñÔÚ²Áµ¯·¶Î§ÄÚ
+                {
+                    enmBullet.isGrazed = true;
+                    grazeCount++;
+                    
+                    Debug.Log("²Áµ¯Êý" + grazeCount);
+                }
+                else
+                {
+                    enmBullet.isGrazed = false;
+                }
+            }
+
         }
+
     }
     public void SlowMode()
     {
@@ -158,4 +179,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+   
+
 }

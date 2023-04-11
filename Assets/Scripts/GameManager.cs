@@ -19,12 +19,16 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI restartText;
     public TextMeshProUGUI quitText;
     public PlayerHurtDamage playerHurtDamage;
+    //擦弹
+    public PlayerController playerController;
+    public TextMeshProUGUI grazeText;
 
     public bool isGameOver;
     // Start is called before the first frame update
     void Start()
     {
         playerHurtDamage = FindObjectOfType<PlayerHurtDamage>();
+        playerController = FindObjectOfType<PlayerController>();
         isGameOver = playerHurtDamage.isGameOver;
     }
 
@@ -56,6 +60,8 @@ public class GameManager : MonoBehaviour
                 Application.Quit();
             }
         }
+        //擦弹数显示
+        grazeText.text = "graze " + playerController.grazeCount;
     }
     //计时器
     void Timer()

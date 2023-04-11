@@ -11,6 +11,9 @@ public class BulletBehaviour : MonoBehaviour
     public float AngularAcceleration = 0;
     public float MaxVelocity = int.MaxValue;
     public float LifeTime =5;
+    public GameObject enmBullet;
+    //²Áµ¯
+    public bool isGrazed=false;
     // Start is called before the first frame update
     void Start()
     {
