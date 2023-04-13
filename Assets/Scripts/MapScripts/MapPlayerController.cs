@@ -11,12 +11,14 @@ public class MapPlayerController : MonoBehaviour
     public float normalSpeed = 2.0f;
     public bool isFastMode = false;
 
-    
+    public Transform boundary;
+    private Rigidbody2D playerRb;
 
     private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
+        playerRb= GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
@@ -51,6 +53,14 @@ public class MapPlayerController : MonoBehaviour
         {
             anim.SetBool("isIdle", true);
         }
+
+        if (transform.position.x < boundary.position.x - boundary.localScale.x / 2 ||
+           transform.position.x > boundary.position.x + boundary.localScale.x / 2 ||
+           transform.position.y < boundary.position.y - boundary.localScale.y / 2 ||
+           transform.position.y > boundary.position.y + boundary.localScale.y / 2)
+        {
+            playerRb.velocity = Vector2.zero;
+        }
     }
     public void PlayerMove()
     {
@@ -59,6 +69,8 @@ public class MapPlayerController : MonoBehaviour
 
         verticalInput = Input.GetAxisRaw("Vertical");
         transform.Translate(Vector3.up * verticalInput * Time.deltaTime * speed);
+
+        playerRb.velocity = new Vector2(horizontalInput, verticalInput) * speed;
 
 
     }

@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,12 +101,25 @@ MonoBehaviour:
   horizontalInput: 0
   verticalInput: 0
   speed: 8
+  normalSpeed: 8
   lowSpeed: 4
   XRange: 14.7
   YRange: 11.6
   currentTime: 0.2
   bombDamage: 50
   plyBullet: {fileID: 0}
+  decisionPoint: {fileID: 0}
+  playerHurtDamage: {fileID: 0}
+  isGameOver: 0
+  isSlowMode: 0
+  weaponPrefabs: []
+  weaponOffsetX: []
+  weaponOffsetY: []
+  weaponDistance: 1.5
+  weaponDistanceSlow: 0.8
+  moveSpeed: 5
+  grazeRadius: 3
+  grazeCount: 0
 --- !u!114 &-2058085635686522935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,3 +135,9 @@ MonoBehaviour:
   playerHealth: 300
   enemy: {fileID: 6889454922877675191, guid: 64f692ef53ff2ca4e9eeb911ac8437d6, type: 3}
   healthBar: {fileID: 2837749083261128877, guid: a5fad1db7b481e545b942dd675342cea, type: 3}
+  gameOverText: {fileID: 0}
+  restartText: {fileID: 0}
+  gameManager: {fileID: 0}
+  isGameOver: 0
+  noHurtTime: 3
+  isNoHurt: 0

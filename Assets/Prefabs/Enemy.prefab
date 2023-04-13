@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   health: 500
   damage: 5
   enmAtk: 100
+  stageClearText: {fileID: 0}
 --- !u!61 &6889454922877675194
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -222,6 +223,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 11400000, guid: abc536389eded3e44af9504568716b5e, type: 2}
+  currentAngle: 0
+  currentAngularVelocity: 0
+  currentTime: 0
 --- !u!4 &6889454923328314091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6953750842119334919, guid: e696f4f0c9cf2dc4cb689beeb4767799, type: 3}
