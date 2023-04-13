@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b889738d9cac18a4fa63553b613e0e20, type: 3}
   m_Name: New Bullet Object
   m_EditorClassIdentifier: 
-  LinearVelocity: 3
+  LinearVelocity: 5
   Acceleration: 0
   AngularVelocity: 30
   AngularAcceleration: 0

@@ -21,6 +21,10 @@ public class PlayerHurtDamage : MonoBehaviour
 
     public GameManager gameManager;
     public bool isGameOver=false;
+    //中弹后无敌时间
+    public float noHurtTime=3f;
+    public bool isNoHurt = false;
+
 
 
     void Start()
@@ -38,11 +42,7 @@ public class PlayerHurtDamage : MonoBehaviour
     {
         //自机血量归0时，游戏结束
         GameOver(playerHealth);
-        if (isGameOver&&Input.GetKeyDown(KeyCode.Z))
-        {
-                gameManager.Restart();
-                isGameOver = false;
-        }
+        
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -56,25 +56,32 @@ public class PlayerHurtDamage : MonoBehaviour
     //自机受到的伤害计算公式
     public void PlayerTakeDamage(float enmAtk, float enmBulletCount)
     {
+        if (isNoHurt) { return; }
         lastPlayerHurt = enmAtk * enmBulletCount;
         playerHealth -= lastPlayerHurt;
         healthBar.value = playerHealth;
+
+        StartCoroutine(NoHurtMode());
     }
     public void GameOver(float playerHealth)
     {
         if (playerHealth <= 0)
         {
             isGameOver = true;
-            if (isGameOver == true)
-            {
-                Debug.Log("gameover");
-            }
             Destroy(gameObject);
             gameOverText.gameObject.SetActive(true);
             restartText.gameObject.SetActive(true);
 
 
         }
+    }
+    IEnumerator NoHurtMode()
+    {
+        isNoHurt = true;
+        Debug.Log("无敌时间开始");
+        yield return new WaitForSeconds(noHurtTime);
+        isNoHurt = false;
+        Debug.Log("无敌时间结束");
     }
 
 

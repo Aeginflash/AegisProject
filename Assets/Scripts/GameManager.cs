@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,21 +25,24 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI grazeText;
 
     public bool isGameOver;
+    public bool isNoHurt;
+    public GameObject noHurtText;
     // Start is called before the first frame update
     void Start()
     {
         playerHurtDamage = FindObjectOfType<PlayerHurtDamage>();
         playerController = FindObjectOfType<PlayerController>();
-        isGameOver = playerHurtDamage.isGameOver;
+       
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isGameOver == true)
-        {
-            Debug.Log("gameover");
-        }
+        isGameOver = playerHurtDamage.isGameOver;
+        isNoHurt = playerHurtDamage.isNoHurt;
+        NoHurtEffect();
 
         Timer();
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -61,7 +65,13 @@ public class GameManager : MonoBehaviour
             }
         }
         //擦弹数显示
-        grazeText.text = "graze " + playerController.grazeCount;
+        grazeText.text = "graze " + playerController.grazeCount/2;
+
+        if (isGameOver && Input.GetKeyDown(KeyCode.Z))
+        {
+            Restart();
+            isGameOver = false;
+        }
     }
     //计时器
     void Timer()
@@ -91,6 +101,19 @@ public class GameManager : MonoBehaviour
         Debug.Log("restart");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    //无敌时间显示
+    public void NoHurtEffect()
+    {
+        if(isNoHurt)
+        {
+            noHurtText.SetActive(true);
+        }
+        else
+        {
+            noHurtText.SetActive(false);
+        }
+    }
+
     
 
 }

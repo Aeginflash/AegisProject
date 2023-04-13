@@ -20,11 +20,13 @@ public class SpecialMethod : MonoBehaviour
     public GameObject bombText;
 
     public float timer = 0.5f;
+    public PlayerHurtDamage playerHurtDamage;
     // Start is called before the first frame update
     void Start()
     {
         postProcessVolume.enabled = false;
         bombText.SetActive(false);
+        playerHurtDamage=FindObjectOfType<PlayerHurtDamage>();
         
     }
 
@@ -65,7 +67,7 @@ public class SpecialMethod : MonoBehaviour
 
         while (Time.time < startTime + bombDuration)
         {
-            
+            playerHurtDamage.isNoHurt = true;
             foreach (GameObject enemyObj in GameObject.FindGameObjectsWithTag("Enemy"))
             {
                 enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
@@ -84,6 +86,7 @@ public class SpecialMethod : MonoBehaviour
             }
             yield return null;
         }
+        playerHurtDamage.isNoHurt = false;
         bombText.SetActive (false);
         bombCoolDown = false;
         postProcessVolume.enabled = false;

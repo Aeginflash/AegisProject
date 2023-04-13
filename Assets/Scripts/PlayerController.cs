@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private List<GameObject> weapons = new List<GameObject>();
 
     //²Áµ¯
-    public float grazeRadius = 1f; // ²Áµ¯°ë¾¶
+    public float grazeRadius = 3f; // ²Áµ¯°ë¾¶
     public int grazeCount = 0; // ²Áµ¯´ÎÊý
     
 
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         isSlowMode = false;
         invokeTime = currentTime;
         playerHurtDamage = FindObjectOfType<PlayerHurtDamage>();
-        isGameOver = playerHurtDamage.isGameOver;
+        
  
         //×Ó»ú
         for (int i = 0; i < 4; i++)
@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        isGameOver = playerHurtDamage.isGameOver;
         if (isGameOver == false)
         {
             SlowMode();
@@ -98,8 +99,6 @@ public class PlayerController : MonoBehaviour
                 {
                     enmBullet.isGrazed = true;
                     grazeCount++;
-                    
-                    Debug.Log("²Áµ¯Êý" + grazeCount);
                 }
                 else
                 {
