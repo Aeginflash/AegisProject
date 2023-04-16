@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScenes : MonoBehaviour
 {
+    public string musicName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,11 @@ public class ChangeScenes : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
+            AudioManager.instance.StopBGM();
             SceneManager.LoadScene(0);
+            
+
+
         }
     }
 }

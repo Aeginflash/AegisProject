@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
             //²Áµ¯
             foreach (BulletBehaviour enmBullet in FindObjectsOfType<BulletBehaviour>())
             {
-                if (enmBullet.isGrazed) return;
+                if (enmBullet.isGrazed) break;
                 
                 Vector2 offset = enmBullet.transform.position - transform.position;
                 if (offset.magnitude <= grazeRadius) // ÅÐ¶ÏÊÇ·ñÔÚ²Áµ¯·¶Î§ÄÚ
@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
                 {
                     enmBullet.isGrazed = false;
                 }
+                
             }
 
         }

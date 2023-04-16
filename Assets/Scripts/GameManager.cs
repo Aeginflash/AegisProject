@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,19 +29,34 @@ public class GameManager : MonoBehaviour
     public bool isGameOver;
     public bool isNoHurt;
     public GameObject noHurtText;
+    public AudioClip musicClip;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerHurtDamage = FindObjectOfType<PlayerHurtDamage>();
         playerController = FindObjectOfType<PlayerController>();
-       
-        
-        
+
+        AudioManager.instance.PlayBGM(musicClip);
+
+        Light2D[] lights = FindObjectsOfType<Light2D>();
+        foreach (Light2D light in lights)
+        {
+            light.enabled = false;
+        }
+
+        GameObject obj = GameObject.Find("CameraPoint");
+        if (obj != null)
+        {
+            // 将相机位置移动到物体位置
+            Camera.main.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, Camera.main.transform.position.z);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         isGameOver = playerHurtDamage.isGameOver;
         isNoHurt = playerHurtDamage.isNoHurt;
         NoHurtEffect();

@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class ObstacleController : MonoBehaviour
 {
-    public TextMeshProUGUI infoText;
+    public GameObject infoText;
     private bool isFacingObstacle = false;
     // Start is called before the first frame update
     void Start()
     {
-        infoText.gameObject.SetActive(false);
+        infoText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -19,7 +19,8 @@ public class ObstacleController : MonoBehaviour
     {
         if (isFacingObstacle && Input.GetKeyDown(KeyCode.Z))
         {
-            infoText.gameObject.SetActive(true);
+            infoText.SetActive(true);
+            
         }
     }
 

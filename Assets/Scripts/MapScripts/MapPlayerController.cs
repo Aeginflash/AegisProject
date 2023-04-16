@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MapPlayerController : MonoBehaviour
 {
     public float horizontalInput;
@@ -11,58 +12,61 @@ public class MapPlayerController : MonoBehaviour
     public float normalSpeed = 2.0f;
     public bool isFastMode = false;
 
-    public Transform boundary;
+    public static MapPlayerController instance;
+
     private Rigidbody2D playerRb;
 
     private Animator anim;
+
+    public bool canMove = true;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        playerRb= GetComponent<Rigidbody2D>();
+        
+        playerRb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        instance = this;
+       
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        FastMode();
-        PlayerMove();
+        if (canMove)
+        {
+            MapFastMode();
+            MapPlayerMove();
 
-        if (horizontalInput != 0 || verticalInput != 0)
-        {
-            if (horizontalInput > 0)
+            if (horizontalInput != 0 || verticalInput != 0)
             {
-                anim.Play("WalkRight");
-                
-            }
-            else if (horizontalInput < 0)
-            {
-                anim.Play("WalkLeft");
-            }
-            else if (verticalInput > 0)
-            {
-                anim.Play("WalkBack");
-            }
-            else if (verticalInput < 0)
-            {
-                anim.Play("WalkForward");
-            }
-            anim.SetBool("isIdle", false);
-        }
-        else
-        {
-            anim.SetBool("isIdle", true);
-        }
+                if (horizontalInput > 0)
+                {
+                    anim.Play("WalkRight");
 
-        if (transform.position.x < boundary.position.x - boundary.localScale.x / 2 ||
-           transform.position.x > boundary.position.x + boundary.localScale.x / 2 ||
-           transform.position.y < boundary.position.y - boundary.localScale.y / 2 ||
-           transform.position.y > boundary.position.y + boundary.localScale.y / 2)
-        {
-            playerRb.velocity = Vector2.zero;
+                }
+                else if (horizontalInput < 0)
+                {
+                    anim.Play("WalkLeft");
+                }
+                else if (verticalInput > 0)
+                {
+                    anim.Play("WalkBack");
+                }
+                else if (verticalInput < 0)
+                {
+                    anim.Play("WalkForward");
+                }
+                anim.SetBool("isIdle", false);
+            }
+            else
+            {
+                anim.SetBool("isIdle", true);
+            }
         }
     }
-    public void PlayerMove()
+    public void MapPlayerMove()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
@@ -74,22 +78,23 @@ public class MapPlayerController : MonoBehaviour
 
 
     }
-    public void FastMode()
+    public void MapFastMode()
     {
         speed = normalSpeed;
         if (Input.GetKey(KeyCode.LeftShift))
         {
             isFastMode = true;
             speed = fastSpeed;
-            
+
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             isFastMode = false;
             speed = normalSpeed;
-            
+
         }
     }
+
 }
     
 
