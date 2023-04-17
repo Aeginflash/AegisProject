@@ -352,9 +352,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0065174103}
+  m_Offset: {x: 0.008411035, y: -0.068198204}
   serializedVersion: 2
-  m_Radius: 0.13720512
+  m_Radius: 0.11197196
 --- !u!1 &371378960
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &371378961
 Transform:
   m_ObjectHideFlags: 0
@@ -380,8 +380,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371378960}
   m_LocalRotation: {x: -0, y: -0, z: 0.008349914, w: 0.99996513}
-  m_LocalPosition: {x: 0.002, y: -0.0075, z: -1}
-  m_LocalScale: {x: 0.28657538, y: 0.28343496, z: 1}
+  m_LocalPosition: {x: 0.002, y: -0.09, z: -1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 348300298}
@@ -428,8 +428,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.11436452, g: 0.11517103, b: 0.14150941, a: 1}
+  m_Sprite: {fileID: -1390982207, guid: 8ac82f870322a96429219654b7fa4cb5, type: 3}
+  m_Color: {r: 0.0779043, g: 0.5569925, b: 0.9528302, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -631,7 +631,7 @@ MonoBehaviour:
   isGameOver: 0
   isNoHurt: 0
   noHurtText: {fileID: 379936453}
-  musicClip: {fileID: 8300000, guid: 296c6ecd852d42544be1bcd3c1529cf4, type: 3}
+  musicClip: {fileID: 8300000, guid: 07402ad714719404bbd9694ff2616a2c, type: 3}
 --- !u!114 &508640001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,6 +1032,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 371378960}
     - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
+      propertyPath: weaponDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
+      propertyPath: weaponDistanceSlow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: weaponOffsetX.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -1045,35 +1053,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: weaponOffsetX.Array.data[0]
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: weaponOffsetX.Array.data[1]
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: weaponOffsetX.Array.data[2]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: weaponOffsetX.Array.data[3]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: weaponOffsetY.Array.data[0]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: weaponOffsetY.Array.data[1]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: weaponOffsetY.Array.data[2]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: weaponOffsetY.Array.data[3]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 67864749673259634, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: weaponPrefabs.Array.data[0]
@@ -1104,16 +1112,20 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7019111034555602392, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1113160815, guid: f4326670849b8b849a077c622a2e0799, type: 3}
+    - target: {fileID: 7019111034555602392, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: m_Color.b
-      value: 0.9716981
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7019111034555602392, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: m_Color.g
-      value: 0.63348705
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7019111034555602392, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: m_Color.r
-      value: 0.18028356
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7019111034555602392, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: m_SortingOrder
@@ -1122,6 +1134,14 @@ PrefabInstance:
     - target: {fileID: 8848320801701211401, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8848320801701211401, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8848320801701211401, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8848320801701211401, guid: f6b0ded39b9edb744a6009e2a397a7a5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2452,8 +2472,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -118, y: -6}
-  m_SizeDelta: {x: 1667.8999, y: 163.78992}
+  m_AnchoredPosition: {x: -150.25, y: 4.75}
+  m_SizeDelta: {x: 1727.21, y: 376.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1469191425
 GameObject:

@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         playerHurtDamage = FindObjectOfType<PlayerHurtDamage>();
         playerController = FindObjectOfType<PlayerController>();
 
-        AudioManager.instance.PlayBGM(musicClip);
+        
 
         Light2D[] lights = FindObjectsOfType<Light2D>();
         foreach (Light2D light in lights)
@@ -51,6 +51,10 @@ public class GameManager : MonoBehaviour
             // 将相机位置移动到物体位置
             Camera.main.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, Camera.main.transform.position.z);
         }
+    }
+    void Start()
+    {
+        AudioManager.instance.PlayBGM(musicClip);
     }
 
     // Update is called once per frame

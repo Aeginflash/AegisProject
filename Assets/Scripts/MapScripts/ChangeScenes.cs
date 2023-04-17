@@ -19,7 +19,7 @@ public class ChangeScenes : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             AudioManager.instance.StopBGM();
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
             
 
 

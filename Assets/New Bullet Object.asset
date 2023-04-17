@@ -23,7 +23,7 @@ MonoBehaviour:
   SenderAngularVelocity: 20
   MaxSenderAngularVelocity: 2.1474836e+9
   SenderAcceleration: -10
-  Count: 5
+  Count: 10
   LineAngle: 45
   SendInterval: 0.2
   bulletAppearances: []
