@@ -15,6 +15,9 @@ public class SpecialMethod : MonoBehaviour
     public PostProcessVolume postProcessVolume;
     private Bloom bloom;
     private ColorGrading colorGrading;
+
+    public AudioClip bombSE;
+    public SEManager seManager;
     //判断特效计时器运行
     private bool isTimerRunning = false;
     public GameObject bombText;
@@ -27,7 +30,9 @@ public class SpecialMethod : MonoBehaviour
         postProcessVolume.enabled = false;
         bombText.SetActive(false);
         playerHurtDamage=FindObjectOfType<PlayerHurtDamage>();
-        
+
+        seManager = FindObjectOfType<SEManager>();
+        bombSE = seManager.bombSE;
     }
 
     // Update is called once per frame
@@ -53,6 +58,7 @@ public class SpecialMethod : MonoBehaviour
     IEnumerator BombActive()
     {
         bombText.SetActive(true);
+        AudioManager.instance.PlaySFX(bombSE, 1);
         postProcessVolume.enabled = true;
         bombCoolDown = true;
 
@@ -68,6 +74,7 @@ public class SpecialMethod : MonoBehaviour
         while (Time.time < startTime + bombDuration)
         {
             playerHurtDamage.isNoHurt = true;
+
             foreach (GameObject enemyObj in GameObject.FindGameObjectsWithTag("Enemy"))
             {
                 enemy = GameObject.Find("Enemy").GetComponent<Enemy>();

@@ -29,15 +29,15 @@ public class GameManager : MonoBehaviour
     public bool isGameOver;
     public bool isNoHurt;
     public GameObject noHurtText;
-    public AudioClip musicClip;
+
 
     // Start is called before the first frame update
     void Awake()
     {
         playerHurtDamage = FindObjectOfType<PlayerHurtDamage>();
         playerController = FindObjectOfType<PlayerController>();
-
         
+
 
         Light2D[] lights = FindObjectsOfType<Light2D>();
         foreach (Light2D light in lights)
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        AudioManager.instance.PlayBGM(musicClip);
+        
     }
 
     // Update is called once per frame
@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
         {
             paused = true;
             pauseScreen.SetActive(true);
+            AudioListener.pause = true; 
             Time.timeScale = 0;
             
         }
@@ -115,6 +116,7 @@ public class GameManager : MonoBehaviour
             paused = false;
             pauseScreen.SetActive(false);
             Time.timeScale = 1;
+            AudioListener.pause = false;
         }
     }
     public void Restart()

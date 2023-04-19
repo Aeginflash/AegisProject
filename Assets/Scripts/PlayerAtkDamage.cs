@@ -8,10 +8,14 @@ public class PlayerAtkDamage : MonoBehaviour
     public int damage;
     public PlayerHurtDamage playerHurtDamage;
     public bool isGameOver;
+    public AudioClip damageSE;
+    public SEManager seManager;
 
     void Start()
     {
         playerHurtDamage= FindObjectOfType<PlayerHurtDamage>();
+        seManager=FindObjectOfType<SEManager>();
+        damageSE = seManager.damageSE;
     }
 
     // Update is called once per frame
@@ -23,7 +27,9 @@ public class PlayerAtkDamage : MonoBehaviour
     {
         if (isGameOver==false&&other.gameObject.CompareTag("Enemy"))
         {
+            AudioManager.instance.PlaySFX(damageSE, 0.4f);
             other.GetComponent<Enemy>().TakeDamage(damage);
+            
             Destroy(gameObject);
         }
 

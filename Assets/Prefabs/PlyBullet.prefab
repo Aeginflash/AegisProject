@@ -154,3 +154,4 @@ MonoBehaviour:
   damage: 10
   playerHurtDamage: {fileID: 0}
   isGameOver: 0
+  damageSE: {fileID: 8300000, guid: 354e03dead8842f4dbe9df1e99219d86, type: 3}

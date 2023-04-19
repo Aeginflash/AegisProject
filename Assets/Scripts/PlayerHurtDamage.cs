@@ -24,8 +24,9 @@ public class PlayerHurtDamage : MonoBehaviour
     //中弹后无敌时间
     public float noHurtTime=3f;
     public bool isNoHurt = false;
+    public AudioClip missSE;
 
-
+    public SEManager seManager;
 
     void Start()
     {
@@ -34,6 +35,9 @@ public class PlayerHurtDamage : MonoBehaviour
         gameOverText.gameObject.SetActive(false);
         restartText.gameObject.SetActive(false);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        seManager = FindObjectOfType<SEManager>();
+        missSE = seManager.missSE;
 
     }
 
@@ -50,6 +54,7 @@ public class PlayerHurtDamage : MonoBehaviour
         if (other.gameObject.CompareTag("enmBullet"))
         {
             PlayerTakeDamage(enemy.enmAtk, enmBulletCount);
+            
             Destroy(other.gameObject);
         }
     }
@@ -60,7 +65,7 @@ public class PlayerHurtDamage : MonoBehaviour
         lastPlayerHurt = enmAtk * enmBulletCount;
         playerHealth -= lastPlayerHurt;
         healthBar.value = playerHealth;
-
+        AudioManager.instance.PlaySFX(missSE, 1);
         StartCoroutine(NoHurtMode());
     }
     public void GameOver(float playerHealth)

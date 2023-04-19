@@ -23,6 +23,8 @@ public class BulletObject : ScriptableObject
     public float LifeTime = 5f;
     //子弹伤害
     public float enmBulletCount = 0.5f;
+    //随机弹角度范围
+    public float RandomAngle = 0;
 
     [Header("发射器初始配置")]
     //初始旋转角度

@@ -20,7 +20,16 @@ public class ChangeScenes : MonoBehaviour
         {
             AudioManager.instance.StopBGM();
             SceneManager.LoadScene(1);
-            
+            //销毁多余的audiolistener组件
+            AudioListener[] listeners = FindObjectsOfType<AudioListener>();
+            foreach (AudioListener listener in listeners)
+            {
+                if (listener.gameObject.scene != gameObject.scene)
+                {
+                    Destroy(listener.gameObject);
+                }
+            }
+
 
 
         }

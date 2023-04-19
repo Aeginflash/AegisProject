@@ -20,7 +20,10 @@ public class PlayerController : MonoBehaviour
     private float invokeTime = 0;
     //弹幕发射间隔
     public float currentTime = 0.2f;
+    //射击音效
+    
 
+    //bomb威力
     public int bombDamage = 50;
 
     public GameObject plyBullet;
@@ -41,7 +44,11 @@ public class PlayerController : MonoBehaviour
     //擦弹
     public float grazeRadius = 3f; // 擦弹半径
     public int grazeCount = 0; // 擦弹次数
+    public AudioClip grazeSE;
     
+
+    //擦弹变色
+    public Color highlightColor;
 
 
     void Start()
@@ -50,7 +57,8 @@ public class PlayerController : MonoBehaviour
         invokeTime = currentTime;
         playerHurtDamage = FindObjectOfType<PlayerHurtDamage>();
         
- 
+
+
         //子机
         for (int i = 0; i < 4; i++)
         {
@@ -97,6 +105,7 @@ public class PlayerController : MonoBehaviour
                 Vector2 offset = enmBullet.transform.position - transform.position;
                 if (offset.magnitude <= grazeRadius) // 判断是否在擦弹范围内
                 {
+                    AudioManager.instance.PlaySFX(grazeSE,0.2f);
                     enmBullet.isGrazed = true;
                     grazeCount++;
                 }
@@ -106,6 +115,7 @@ public class PlayerController : MonoBehaviour
                 }
                 
             }
+            grazeChangeColor(grazeRadius,highlightColor);
 
         }
 
@@ -140,6 +150,7 @@ public class PlayerController : MonoBehaviour
         //发射子弹
         if (Input.GetKey(KeyCode.Z))
         {
+            
             //按下Z键开始计时
             invokeTime += Time.deltaTime;
             //超过间隔时执行
@@ -180,6 +191,36 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void grazeChangeColor(float grazeRadius,Color highlightColor)
+    {
+        GameObject[] enmBullets = GameObject.FindGameObjectsWithTag("enmBullet");
+        foreach (GameObject enmBullet in enmBullets)
+        {
+
+            // 计算主角物体与当前 enmbullet 物体之间的距离
+            float distance = Vector2.Distance(transform.position, enmBullet.transform.position);
+            Renderer renderer = enmBullet.GetComponent<Renderer>();
+            if (distance <= grazeRadius)
+            {
+                // 如果距离小于等于半径，则变红
+                
+                if (renderer != null)
+                {
+                    renderer.material.color = highlightColor;
+                }
+            }
+            else
+            {
+                // 如果距离大于半径，则将颜色恢复为原始颜色
+                if (renderer != null)
+                {
+                    renderer.material.color = Color.white;
+
+                }
+            }
+        }
+    }
+}
    
 
-}
+

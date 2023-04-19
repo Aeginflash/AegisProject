@@ -13,13 +13,17 @@ public class Enemy : MonoBehaviour
     public int damage = 5;
     //µÐÈË¹¥»÷Á¦
     public float enmAtk = 100;
-
+    public AudioClip enemyFailSE;
+    public SEManager seManager;
     public GameObject stageClearText;
     // Start is called before the first frame update
     void Start()
     {
         stageClearText.SetActive(false);
         healthBar.value = healthBar.maxValue = health;
+
+        seManager=FindObjectOfType<SEManager>();
+        enemyFailSE = seManager.enemyFailSE;
     }
 
     // Update is called once per frame
@@ -38,6 +42,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            AudioManager.instance.PlaySFX(enemyFailSE, 0.8f);
             stageClearText.SetActive(true);
         }
     }
