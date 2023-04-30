@@ -43,6 +43,12 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
             AudioManager.instance.PlaySFX(enemyFailSE, 0.8f);
+
+            GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("enmBullet");
+            foreach (GameObject bullet in enemyBullets)
+            {
+                Destroy(bullet);
+            }
             stageClearText.SetActive(true);
         }
     }

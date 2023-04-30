@@ -10,8 +10,11 @@ public class BulletBehaviour : MonoBehaviour
     public float AngularVelocity = 0;
     public float AngularAcceleration = 0;
     public float MaxVelocity = int.MaxValue;
-    public float LifeTime =5;
+    public float LifeTime =30;
     public GameObject enmBullet;
+    public bool isBulletDead=false;
+
+    
     //²Áµ¯
     public bool isGrazed=false;
     // Start is called before the first frame update
@@ -30,10 +33,11 @@ public class BulletBehaviour : MonoBehaviour
         transform.Translate(LinearVelocity * Vector2.right * Time.fixedDeltaTime, Space.Self);
         transform.rotation*=Quaternion.Euler(new Vector3(0,0,1)*AngularVelocity*Time.fixedDeltaTime);
 
-        LifeTime-=Time.fixedDeltaTime;
+        LifeTime-=Time.deltaTime;
         if(LifeTime<=0)
         {
-            Destroy(gameObject);
+            isBulletDead=true;
+            
         }
     }
 }

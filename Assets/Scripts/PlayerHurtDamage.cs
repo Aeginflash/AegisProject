@@ -24,6 +24,13 @@ public class PlayerHurtDamage : MonoBehaviour
     //中弹后无敌时间
     public float noHurtTime=3f;
     public bool isNoHurt = false;
+    //无敌时间闪烁
+    public Color normalColor;
+    public Color specialColor;
+    public float blinkInterval = 0.1f; // 闪烁间隔时间
+
+    private SpriteRenderer spriteRenderer;
+    //miss音效
     public AudioClip missSE;
 
     public SEManager seManager;
@@ -39,6 +46,8 @@ public class PlayerHurtDamage : MonoBehaviour
         seManager = FindObjectOfType<SEManager>();
         missSE = seManager.missSE;
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -46,7 +55,8 @@ public class PlayerHurtDamage : MonoBehaviour
     {
         //自机血量归0时，游戏结束
         GameOver(playerHealth);
-        
+        StartCoroutine(Blink());
+
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -83,11 +93,32 @@ public class PlayerHurtDamage : MonoBehaviour
     IEnumerator NoHurtMode()
     {
         isNoHurt = true;
-        Debug.Log("无敌时间开始");
+        
         yield return new WaitForSeconds(noHurtTime);
         isNoHurt = false;
-        Debug.Log("无敌时间结束");
+        
     }
+    IEnumerator Blink()
+    {
+        float startTime = Time.time;
+        float interval = blinkInterval;
 
+        // 每个间隔时间交替设置自机的颜色
+        while (isNoHurt)
+        {
+            if (Time.time - startTime >= interval)
+            {
+                startTime = Time.time;
+
+                // 交替设置自机颜色
+                spriteRenderer.color = spriteRenderer.color == specialColor ? normalColor: specialColor;
+            }
+
+            yield return null;
+        }
+
+        // 在无敌时间结束时将自机的颜色设置回来
+        spriteRenderer.color = normalColor;
+    }
 
 }

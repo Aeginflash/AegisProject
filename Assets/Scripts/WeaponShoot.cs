@@ -11,7 +11,7 @@ public class WeaponShoot : MonoBehaviour
     //µ¯Ä»¼ÆÊ±Æ÷
     private float invokeTime = 0;
     //µ¯Ä»·¢Éä¼ä¸ô
-    public float currentTime = 0.2f;
+    private float currentTime = 0.4f;
     public PlayerHurtDamage playerHurtDamage;
     public bool isGameOver;
 

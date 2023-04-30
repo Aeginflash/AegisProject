@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    //低速
     public void SlowMode()
     {
         speed = normalSpeed;
@@ -136,6 +137,7 @@ public class PlayerController : MonoBehaviour
             decisionPoint.SetActive(false);
         }
     }
+    //移动
     public void PlayerMove()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -168,6 +170,7 @@ public class PlayerController : MonoBehaviour
             invokeTime = currentTime;
         }
     } 
+    //自机移动边界
     public void PlayerRange(float XRange,float YRange)
     {
         //判定x轴边界
@@ -190,7 +193,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    //擦弹变红色
     public void grazeChangeColor(float grazeRadius,Color highlightColor)
     {
         GameObject[] enmBullets = GameObject.FindGameObjectsWithTag("enmBullet");

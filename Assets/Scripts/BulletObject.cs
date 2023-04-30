@@ -25,6 +25,10 @@ public class BulletObject : ScriptableObject
     public float enmBulletCount = 0.5f;
     //随机弹角度范围
     public float RandomAngle = 0;
+    //是否自机相关
+    public bool IsPlayerAim = false;
+    //是否是一组子弹
+    public bool IsBulletGroup=false;
 
     [Header("发射器初始配置")]
     //初始旋转角度
@@ -41,6 +45,12 @@ public class BulletObject : ScriptableObject
     public float LineAngle = 30;
     //发射间隔
     public float SendInterval = 0.1f;
+    //发射器随机移动间隔
+    public float SenderMoveInterval = 0.1f;
+    //随机移动范围X
+    public float MoveRangeX = 5.0f;
+    //随机移动范围Y
+    public float MoveRangeY = 3.0f;
 
     [Header("子弹外形")]
     public BulletAppearance[] bulletAppearances;
@@ -55,4 +65,5 @@ public class BulletObject : ScriptableObject
     [Header("预制体")]
     public GameObject prefabs;
 
+ 
 }

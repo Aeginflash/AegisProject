@@ -62,8 +62,7 @@ public class GameManager : MonoBehaviour
     {
         
         isGameOver = playerHurtDamage.isGameOver;
-        isNoHurt = playerHurtDamage.isNoHurt;
-        NoHurtEffect();
+       
 
         Timer();
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -125,17 +124,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     //无敌时间显示
-    public void NoHurtEffect()
-    {
-        if(isNoHurt)
-        {
-            noHurtText.SetActive(true);
-        }
-        else
-        {
-            noHurtText.SetActive(false);
-        }
-    }
+    
 
     
 

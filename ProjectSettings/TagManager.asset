@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - enmBullet
   - MapObj
+  - Weapon
   layers:
   - Default
   - TransparentFX

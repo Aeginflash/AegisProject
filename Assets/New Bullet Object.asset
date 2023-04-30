@@ -12,20 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b889738d9cac18a4fa63553b613e0e20, type: 3}
   m_Name: New Bullet Object
   m_EditorClassIdentifier: 
-  LinearVelocity: 8
+  LinearVelocity: 5
   Acceleration: 0
-  AngularVelocity: 0
-  AngularAcceleration: 0
+  AngularVelocity: 10
+  AngularAcceleration: 10
   MaxVelocity: 2.1474836e+9
   LifeTime: 10
   enmBulletCount: 0.5
   RandomAngle: 0
-  InitRotation: 0
+  IsPlayerAim: 0
+  IsBulletGroup: 0
+  InitRotation: 90
   SenderAngularVelocity: 20
   MaxSenderAngularVelocity: 2.1474836e+9
-  SenderAcceleration: 0
-  Count: 7
-  LineAngle: 45
+  SenderAcceleration: -10
+  Count: 9
+  LineAngle: 40
   SendInterval: 0.5
+  SenderMoveInterval: 0.5
+  MoveRangeX: 3
+  MoveRangeY: 5
   bulletAppearances: []
   prefabs: {fileID: 599675417866864716, guid: f7540d4c840c2314c88ac7776660f0ac, type: 3}
